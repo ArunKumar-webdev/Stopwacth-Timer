@@ -1,0 +1,86 @@
+<style>
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button2 {background-color: #008CBA;} /* Blue */
+.button3 {background-color: #f44336;} /* Red */ 
+.button4 {background-color: #e7e7e7; color: black;} /* Gray */ 
+.button5 {background-color: #555555;} /* Black */
+.button5 {background-color: #555555;} /* Black */
+</style>
+<script src="index.js"></script>
+<div  class="button button5"><label>Stopwatch</label><div>
+  <br><div>Hr:Min:Sec</div>
+<div id = 'timer'>00:00:00</div>
+</div></div>
+<br>
+<button class="button" id="Start">Start</button>
+<button class="button button2" id="Pause">Pause</button>
+<button class="button button3" id="Reset">Reset</button>
+<button class="button button4" id="CountDown">CountDown</button>
+
+<body>
+  <script>
+    var timer;
+var sec = 0;
+var min = 0;
+var hours = 0;
+var element = document.getElementById('timer');
+
+document.getElementById('Start').onclick = function () {
+  timer = setInterval(() => {
+    if (sec > 59) {
+      sec = 0;
+      min++;
+    } else if (min > 59) {
+      sec = 0;
+      hours++;
+    }
+    element.innerHTML = hours + ':' + min + ':' + sec;
+    sec++;
+  }, 1000);
+};
+
+document.getElementById('Pause').onclick = function () {
+  clearInterval(timer);
+};
+
+document.getElementById('Reset').onclick = function () {
+  sec = 00;
+  hours = 00;
+  min = 00;
+  element.innerHTML = '00:00:00';
+  clearInterval(timer);
+};
+
+
+document.getElementById('CountDown').onclick = function () {
+  clearInterval(timer);
+  timer = setInterval(() => {
+    if (sec > 0) {
+      sec--;
+    } else if (min > 0) {
+      min--;
+      sec = 59;
+    } else if(hours > 0){
+      hours--;
+      min = 59;      
+    }
+    element.innerHTML = hours + ':' + min + ':' + sec;
+    if (sec === 0 && min === 0) {
+      clearInterval(timer);
+    }
+  }, 1000);
+};
+  </script>
+</body>
